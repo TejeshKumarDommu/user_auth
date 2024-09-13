@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Dashboard</title>
+	<style>
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+	<a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    <div class="container">
+        <h2>{{ role }} Dashboard</h2>
+		
+		<h3>Create User</h3>
+        <form action="/register" method="POST">
+			<input type="text" name="username" placeholder="Username" required>
+			<input type="password" name="password" placeholder="Password" required>
+
+			<select name="role">
+				{% if role == 'Superadmin' %}
+				<option value="Admin">Admin</option>
+				{% elif role == 'Admin' %}
+				<option value="Superuser">Superuser</option>
+				<option value="User">User</option>
+				{% endif %}
+			</select>
+
+			<button type="submit">Create User</button>
+		</form>
+
+		
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user[0] }}</td>
+                <td>{{ user[1] }}</td>
+                <td>{{ user[3] }}</td>
+                <td>
+                    {% if role == 'Superadmin' %}
+                    <form action="/update_role/{{ user[0] }}" method="POST" style="display:inline;">
+                        <select name="role">
+                            <option value="Admin" {% if user[3] == 'Admin' %}selected{% endif %}>Admin</option>
+                            <option value="Superuser" {% if user[3] == 'Superuser' %}selected{% endif %}>Superuser</option>
+                            <option value="User" {% if user[3] == 'User' %}selected{% endif %}>User</option>
+                        </select>
+                        <button type="submit">Update Role</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        
+    </div>
+</body>
+</html>

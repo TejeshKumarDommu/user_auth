@@ -1,0 +1,26 @@
+Login to AWS using Credentials
+
+Create a EC2 Instance with free tier(Ubuntu)
+
+Launch Instance
+
+Connect to CONSOLE form Instance (or) Connect Using ssh Client using Key Pair
+
+After Connecting Run the Commands:
+>sudo apt update
+>sudo apt install python3
+>sudo apt install python3-venv
+>sudo apt install python3-pip
+>sudo apt install sqlite3
+>pip3 install Flask pyJWT
+
+Copy Your files from local to Aws instance using SCP method (or) Create Files and Write in the EC2 console
+
+After completion of copying or creating files to the Instance
+
+Run
+>python3 app.py
+
+copy the EC2 Url from Instance
+Home Page:  http://ec2-3-110-167-63.ap-south-1.compute.amazonaws.com:8000/
+Login Page: http://ec2-3-110-167-63.ap-south-1.compute.amazonaws.com:8000/login
